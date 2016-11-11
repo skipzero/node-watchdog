@@ -9,7 +9,10 @@ http.get('http://10.0.0.70', (res, err) => {
   });
 
   res.on('data', (data) => {
-    console.log(data);
+    let status = data.statusCode;
+    if (status === 200) {
+      console.log('Weeeeee.....')
+    }
   })
   console.info(gpio);
 })

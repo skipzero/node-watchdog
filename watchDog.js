@@ -14,7 +14,7 @@ const min = (num) => {
 const timer = sec(3);
 const mainMin = (15);
 
-console.log('sec', timeer, 'mainMin', mainMin);
+console.log('sec', timer, 'mainMin', mainMin);
 
 gpio.BCM_GPIO = true;
 

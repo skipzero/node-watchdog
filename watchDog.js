@@ -29,13 +29,13 @@ function cycleOff (pin) {
 function cycleOn (pin) {
   setTimout(() => {
     gpio.write(pin, 0, () => {
-      done();;
+      done();
     });
   }, 0);
 };
 
 function done () {
-  conesole.info('Station reset', new Date(););
+  conesole.info('Station reset', new Date());
 }
 
 const getWeather = () => {
@@ -59,5 +59,5 @@ const getWeather = () => {
 }
 
 const mainTimer = () => {
-  const setTimeout(getWeather, )
+  const setTimeout(getWeather, mainMin)
 }

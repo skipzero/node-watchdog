@@ -18,8 +18,10 @@ http.get('http://10.0.0.70', (res, err) => {
 
     if (status !== true) {
       gpio.sequence();
+    } else {
+      console.log('ok....')
     }
-    
+
   });
   console.info(gpio);
 })

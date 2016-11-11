@@ -9,7 +9,7 @@ http.get('http://10.0.0.70', (res, err) => {
   });
 
   res.on('data', (data) => {
-    console.log(res);
+    console.log(data);
   })
   console.info(gpio);
 })

@@ -8,22 +8,18 @@ gpio.BCM_GPIO = true;
 http.get('http://10.0.0.70', (res, err) => {
   res.setEncoding('utf8');
 
-  console.log('......', res.statusCode);
-
   res.on('err', (err) => {
-    console.log(err);
+    console.log(err.message);
   });
 
   res.on('data', (data) => {
     let status = JSON.parse(data);
     status = status.connected;
 
-    console.log('Data', status);
-
-    if (status === 200) {
-
-      console.log('Weeeeee.....')
+    if (status !== true) {
+      gpio.sequence();
     }
-  })
+    
+  });
   console.info(gpio);
 })

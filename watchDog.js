@@ -1,7 +1,15 @@
 const http = require('http');
-const gpio = require('gpio');
+const gpio = require('wpi-gpio');
 
-http.get('http://10.0.0.70', (res) => {
-  console.log(res);
+gpio.BCM_GPIO = true;
+
+http.get('http://10.0.0.70', (res, err) => {
+  res.on(err, (err) => {
+    console.log(err);
+  });
+
+  res.on(data, (data) => {
+    console.log(res);
+  })
   console.info(gpio);
 })

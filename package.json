@@ -1,0 +1,30 @@
+{
+  "name": "node-watchdog",
+  "version": "0.0.1",
+  "description": "watchdog for checking IP and toggling GPIO pins",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  private: true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zerosquadron/node-watchdog.git"
+  },
+  "keywords": [
+    "RPi",
+    "Raspberry",
+    "Pi",
+    "GPIO",
+    "Node"
+  ],
+  "author": "Skip McBride",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zerosquadron/node-watchdog/issues"
+  },
+  "homepage": "https://github.com/zerosquadron/node-watchdog#readme",
+  "dependencies": {
+
+  }
+}

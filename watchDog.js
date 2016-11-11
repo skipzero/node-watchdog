@@ -15,7 +15,11 @@ http.get('http://10.0.0.70', (res, err) => {
   });
 
   res.on('data', (data) => {
-    let status = data.statusCode;
+    let status = JSON.parse(data);
+    status = status.connected;
+
+    console.log('Data', status);
+
     if (status === 200) {
 
       console.log('Weeeeee.....')

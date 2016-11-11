@@ -1,7 +1,7 @@
 'use strict';
 
 const http = require('http');
-const gpio = require('wpi-gpio');
+const gpio = require('pi-gpio');
 
 gpio.BCM_GPIO = true;
 

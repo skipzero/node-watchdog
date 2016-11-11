@@ -59,5 +59,5 @@ const getWeather = () => {
 }
 
 const mainTimer = () => {
-  const setTimeout(getWeather, mainMin)
+  const timing = setTimeout(getWeather, mainMin)
 }

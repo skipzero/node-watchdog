@@ -3,32 +3,23 @@
 const http = require('http');
 const gpio = require('pi-gpio');
 
-const n = 3;
-const sec = (num) => {
-  return num * 1000;
-}
-const min = (num) => {
-  return sec(num);
-};
+//  Our times
+const secTimer = sec(1);
+const minTimer = min(15);
 
-const timer = sec(3);
-const mainMin = (15);
-
-console.log('sec', timer, 'mainMin', mainMin);
+console.log('sec', secTimer, 'mainMin', minTimer);
 
 gpio.BCM_GPIO = true;
 
 function cycleOff (pin) {
-  setTimout(() => {
-    gpio.write(pin, 0, () => {
-      cycleOn();
-    });
-  }, timer);
+  gpio.write(pin, 0, () => {
+    cycleOn();
+  });
 };
 
 function cycleOn (pin) {
   setTimout(() => {
-    gpio.write(pin, 0, () => {
+    gpio.write(pin, 1, () => {
       done();
     });
   }, 0);

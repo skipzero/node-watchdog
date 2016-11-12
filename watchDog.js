@@ -43,3 +43,12 @@ const areYouAwake = () => {
     console.info(`Station currently up! ${new Date()}`)
   });
 }
+
+function timerCall () {
+  setTimout(() => {
+    areYouAwake();
+    timerCall();
+  }, minTimer)
+};
+
+timerCall();

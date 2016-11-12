@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/zerosquadron/node-watchdog#readme",
   "dependencies": {
+    "pi-gpio": "0.0.8",
     "wpi-gpio": "0.0.8"
   }
 }

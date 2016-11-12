@@ -3,6 +3,8 @@
 const http = require('http');
 const gpio = require('pi-gpio');
 
+const secTimer = 1000;
+
 function cycleOff () {
   gpio.open(pin, 'output', (err) => {
     gpio.write(pin, 0, () => {

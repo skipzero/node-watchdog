@@ -3,14 +3,6 @@
 const http = require('http');
 const gpio = require('pi-gpio');
 
-//  Our times
-const secTimer = sec(1);
-const minTimer = min(15);
-
-const pin = 16;
-
-console.log('sec', secTimer, 'mainMin', minTimer);
-
 function cycleOff () {
   gpio.open(pin, 'output', (err) => {
     gpio.write(pin, 0, () => {

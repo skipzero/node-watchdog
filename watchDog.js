@@ -44,11 +44,5 @@ const areYouAwake = () => {
   });
 }
 
-function timerCall () {
-  setTimout(() => {
-    areYouAwake();
-    timerCall();
-  }, minTimer)
-};
 
-timerCall();
+areYouAwake();

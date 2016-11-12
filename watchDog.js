@@ -7,48 +7,39 @@ const gpio = require('pi-gpio');
 const secTimer = sec(1);
 const minTimer = min(15);
 
+const pin = 16;
+
 console.log('sec', secTimer, 'mainMin', minTimer);
 
-gpio.BCM_GPIO = true;
-
-function cycleOff (pin) {
-  gpio.write(pin, 0, () => {
-    cycleOn();
-  });
-};
-
-function cycleOn (pin) {
-  setTimout(() => {
-    gpio.write(pin, 1, () => {
-      done();
+function cycleOff () {
+  gpio.open(pin, 'output', (err) => {
+    gpio.write(pin, 0, () => {
+      console.info(`pin ${pin} is off...`);
+      gpio.close(pin);
     });
-  }, 0);
+  });
 };
 
-function done () {
-  conesole.info('Station reset', new Date());
-}
-
-const getWeather = () => {
-  http.get('http://10.0.0.70', (res, err) => {
-      res.setEncoding('utf8');
-      res.on('err', (err) => {
-          console.log(err.message);
-      });
-
-      res.on('data', (data) => {
-          let status = JSON.parse(data);
-          status = status.connected;
-
-          if (status !== true) {
-            cycleOff();
-          } else {
-              console.log('ok....')
-          }
-      });
+function cycleOn () {
+  gpio.open(pin, 'output', (err) => {
+    gpio.write(pin, 1, () => {
+      console.info(`pin ${pin} is on...`);
+      gpio.close(pin);
+    });
   });
-}
+};
 
-const mainTimer = () => {
-  const timing = setTimeout(getWeather, mainMin)
+const areYouAwake = () => {
+  http.get('http://10.0.0.70', (res) => {
+    const code = res.statusCode;
+
+    res.setEncoding('utf8');
+
+    if (code !== 200) {
+      cycleOff();
+      setTimeout(cycleOn, secTimer);
+      return;
+    }
+    console.info(`Station currently up! ${new Date()}`)
+  });
 }

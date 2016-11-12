@@ -30,6 +30,7 @@ const areYouAwake = () => {
     if (code !== 200) {
       cycleOff();
       setTimeout(cycleOn, secTimer);
+      console.log(`reset station on ${pin} at ${new Date()}`)
       return;
     }
     console.info(`Station currently up! ${new Date()}`)

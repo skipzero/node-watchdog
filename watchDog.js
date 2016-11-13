@@ -10,8 +10,7 @@ const stationIP = 'http://10.0.0.138';
 const sec = 1;
 const secTimer = sec * 1000;
 
-//  Our call.... 
-areYouAwake();
+//  Our call....
 
 function cycleOff () {
   gpio.open(pin, 'output', (err) => {
@@ -45,3 +44,5 @@ const areYouAwake = () => {
     console.log(`reset station on ${pin} at ${new Date()}`);
   });
 }
+
+areYouAwake();

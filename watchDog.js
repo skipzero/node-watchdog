@@ -3,7 +3,8 @@
 const http = require('http');
 const gpio = require('pi-gpio');
 
-const secTimer = 1000;
+const sec = 1;
+const secTimer = sec * 1000;
 
 function cycleOff () {
   gpio.open(pin, 'output', (err) => {
@@ -35,7 +36,6 @@ const areYouAwake = () => {
       console.log(`reset station on ${pin} at ${new Date()}`)
       return;
     }
-    console.info(`Station currently up! ${new Date()}`)
   });
 }
 

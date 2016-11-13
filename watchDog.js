@@ -45,4 +45,5 @@ const areYouAwake = () => {
   });
 }
 
-areYouAwake();
+console.info(`checked at ${new Date()}`);
+// areYouAwake();

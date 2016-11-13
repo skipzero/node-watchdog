@@ -3,8 +3,15 @@
 const http = require('http');
 const gpio = require('pi-gpio');
 
+const pin = 16;
+
+const stationIP = 'http://10.0.0.138';
+
 const sec = 1;
 const secTimer = sec * 1000;
+
+//  Our call.... 
+areYouAwake();
 
 function cycleOff () {
   gpio.open(pin, 'output', (err) => {
@@ -25,11 +32,9 @@ function cycleOn () {
 };
 
 const areYouAwake = () => {
-  http.get('http://10.0.0.70', (res) => {
+  http.get(stationIP, (res) => {
     const code = res.statusCode;
-
     res.setEncoding('utf8');
-
     if (code === 200) {
       console.info(`Station up at ${new Date()}`);
       return;
@@ -40,6 +45,3 @@ const areYouAwake = () => {
     console.log(`reset station on ${pin} at ${new Date()}`);
   });
 }
-
-
-areYouAwake();

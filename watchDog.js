@@ -31,7 +31,7 @@ const areYouAwake = () => {
     res.setEncoding('utf8');
 
     if (code === 200) {
-      console.info(`Station up at ${new Data()}`);
+      console.info(`Station up at ${new Date()}`);
       return;
     }
     cycleOff();

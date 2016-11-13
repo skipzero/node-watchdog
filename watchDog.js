@@ -36,6 +36,7 @@ const areYouAwake = () => {
       console.log(`reset station on ${pin} at ${new Date()}`)
       return;
     }
+    console.info(`Station up at ${new Data()}`);
   });
 }
 

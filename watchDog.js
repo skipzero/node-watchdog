@@ -34,6 +34,7 @@ const areYouAwake = () => {
       console.info(`Station up at ${new Date()}`);
       return;
     }
+  }).on('error', (err) => {
     cycleOff();
     setTimeout(cycleOn, secTimer);
     console.log(`reset station on ${pin} at ${new Date()}`);

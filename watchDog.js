@@ -30,13 +30,13 @@ const areYouAwake = () => {
 
     res.setEncoding('utf8');
 
-    if (code !== 200) {
-      cycleOff();
-      setTimeout(cycleOn, secTimer);
-      console.log(`reset station on ${pin} at ${new Date()}`)
+    if (code === 200) {
+      console.info(`Station up at ${new Data()}`);
       return;
     }
-    console.info(`Station up at ${new Data()}`);
+    cycleOff();
+    setTimeout(cycleOn, secTimer);
+    console.log(`reset station on ${pin} at ${new Date()}`);
   });
 }
 

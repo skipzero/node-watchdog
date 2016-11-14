@@ -3,15 +3,14 @@
 const http = require('http');
 const gpio = require('rpi-gpio');
 
-const pin = 23;
+const pin = 27;
 
 const stationIP = 'http://10.0.0.70';
 
 const sec = 1;
 const secTimer = sec * 1000;
 
-gpio.setMode(BCM_MODE);
-console.log('++++++++++++++++++ My GPIO stuff ++++++++++++')
+console.log('++++++++++++++++++ My GPIO stuff ++++++++++++', gpio)
 function cycleOff () {
   setTimeout(() => {
     gpio.write(pin, 0, cycleOn);
@@ -19,8 +18,15 @@ function cycleOff () {
 };
 
 function cycleOn () {
-  gpio.write(pin, 1, cycleOff);
+  setTimeoout(() => {
+    gpio.write(pin, 1, done);
+  }, secTimer);
 };
+
+function done() {
+  gpio.destroy;
+  console.log(`Pin ${pin} destroyed...`);
+}
 
 const areYouAwake = () => {
   http.get(stationIP, (res) => {

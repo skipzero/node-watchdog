@@ -3,7 +3,7 @@
 const http = require('http');
 const gpio = require('rpi-gpio');
 
-const pin = 27;
+const pin = 4;
 
 const stationIP = 'http://10.0.0.710';
 

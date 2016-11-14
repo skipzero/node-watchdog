@@ -10,7 +10,6 @@ const stationIP = 'http://10.0.0.710';
 const sec = 1;
 const secTimer = sec * 1000;
 
-console.log('++++++++++++++++++ My GPIO stuff ++++++++++++', gpio)
 function cycleOff () {
   setTimeout(() => {
     gpio.write(pin, 0, cycleOn);
@@ -43,7 +42,6 @@ const areYouAwake = () => {
     gpio.setup(pin, gpio.DIR_OUT, cycleOff);
     console.log(`reset station on pin ${pin} at ${new Date()}`);
   });
-}
+};
 
-console.info(`checked at ${new Date()}`);
 areYouAwake();

@@ -1,33 +1,25 @@
 'use strict';
 
 const http = require('http');
-const gpio = require('pi-gpio');
+const gpio = require('rpi-gpio');
 
-const pin = 16;
+const pin = 23;
 
-const stationIP = 'http://10.0.0.138';
+const stationIP = 'http://10.0.0.70';
 
 const sec = 1;
 const secTimer = sec * 1000;
 
-//  Our call....
-
+gpio.setMode(BCM_MODE);
+console.log('++++++++++++++++++ My GPIO stuff ++++++++++++')
 function cycleOff () {
-  gpio.open(pin, 'output', (err) => {
-    gpio.write(pin, 0, () => {
-      console.info(`pin ${pin} is off...`);
-      gpio.close(pin);
-    });
-  });
+  setTimeout(() => {
+    gpio.write(pin, 0, cycleOn);
+  }, secTimer);
 };
 
 function cycleOn () {
-  gpio.open(pin, 'output', (err) => {
-    gpio.write(pin, 1, () => {
-      console.info(`pin ${pin} is on...`);
-      gpio.close(pin);
-    });
-  });
+  gpio.write(pin, 1, cycleOff);
 };
 
 const areYouAwake = () => {
@@ -39,8 +31,7 @@ const areYouAwake = () => {
       return;
     }
   }).on('error', (err) => {
-    cycleOff();
-    setTimeout(cycleOn, secTimer);
+    gpio.setup(pin, gpio.DIR_OUT, cycleOff);
     console.log(`reset station on ${pin} at ${new Date()}`);
   });
 }

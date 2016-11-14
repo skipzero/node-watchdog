@@ -5,7 +5,7 @@ const gpio = require('rpi-gpio');
 
 const pin = 27;
 
-const stationIP = 'http://10.0.0.70';
+const stationIP = 'http://10.0.0.710';
 
 const sec = 1;
 const secTimer = sec * 1000;
@@ -18,13 +18,13 @@ function cycleOff () {
 };
 
 function cycleOn () {
-  setTimeoout(() => {
+  setTimeout(() => {
     gpio.write(pin, 1, done);
   }, secTimer);
 };
 
 function done() {
-  gpio.destroy;
+  gpio.destroy();
   console.log(`Pin ${pin} destroyed...`);
 }
 
@@ -43,4 +43,4 @@ const areYouAwake = () => {
 }
 
 console.info(`checked at ${new Date()}`);
-// areYouAwake();
+areYouAwake();

@@ -24,8 +24,11 @@ function cycleOn () {
 };
 
 function done() {
-  gpio.destroy();
-  console.log(`Pin ${pin} destroyed...`);
+  setTimeout(() => {
+    gpio.destroy(() => {
+      console.log(`Pin ${pin} destroyed...`);
+    });
+  }, secTimer);
 }
 
 const areYouAwake = () => {
@@ -38,7 +41,7 @@ const areYouAwake = () => {
     }
   }).on('error', (err) => {
     gpio.setup(pin, gpio.DIR_OUT, cycleOff);
-    console.log(`reset station on ${pin} at ${new Date()}`);
+    console.log(`reset station on pin ${pin} at ${new Date()}`);
   });
 }
 

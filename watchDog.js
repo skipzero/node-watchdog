@@ -4,29 +4,32 @@ const http = require('http');
 const gpio = require('rpi-gpio');
 
 const pin = 23;
+const stationIP = 'http://10.0.0.701';
 
-const stationIP = 'http://10.0.0.70';
-
-const sec = 1;
+const sec = 5;
 const secTimer = sec * 1000;
 
-function cycleOff () {
+gpio.setMode(gpio.MODE_BCM);
+
+const cycleOff = () => {
   setTimeout(() => {
     gpio.write(pin, 0, cycleOn);
   }, secTimer);
 };
 
-function cycleOn () {
+const cycleOn = () => {
   setTimeout(() => {
     gpio.write(pin, 1, done);
   }, secTimer);
 };
 
-function done() {
+const done = () {
   setTimeout(() => {
-    gpio.destroy(() => {
-      console.log(`Pin ${pin} destroyed...`);
-    });
+    gpio.setup(pin, gpio.DIR_OUT, () => {
+      gpio.write(pin, 1, () => {
+        console.info(`station reset, pin #${pin} has been turned on...`)
+      })
+    })
   }, secTimer);
 }
 

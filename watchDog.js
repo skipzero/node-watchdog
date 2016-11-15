@@ -2,7 +2,6 @@
 
 const http = require('http');
 const gpio = require('wpi-gpio');
-const rpio = require('rpio');
 
 const pin = 23;
 const stationIP = 'http://10.0.0.70';
@@ -11,13 +10,24 @@ const sec = 5;
 const secTimer = sec * 1000;
 
 gpio.BCM_GPIO = true;
+gpio.output(pin, 1).then(() => {
+  areYouAwake();
+  console.info(`initial set pin #${pin} to 'on'...`)
+})
 
 const cycleOff = () => {
-  rpio.write(pin, rpio.LOW);
+  gpio.write(pin, 0).then(() => {
+    console.log(`#${pin} set to 'off'...`)
+    cycleOn();
+  })
 };
 
 const cycleOn = () => {
-  rpio.write(pin, rpio.HIGH)
+  setTimeout(() => {
+    gpio.write(pin, 1).then(() => {
+      console.info(`#${pin} set to 'on'...`)
+    })
+  }, secTimer);
 };
 
 const areYouAwake = () => {
@@ -30,12 +40,6 @@ const areYouAwake = () => {
     }
   }).on('error', (err) => {
     cycleOff();
-    rpio.sleep(sec);
-    cycleOn();
-    rpio.destropy();
-
-    console.log(`reset station on pin ${pin} at ${new Date()}`);
+    console.log(`reset station on pin #${pin} at ${new Date()}`);
   });
 };
-
-areYouAwake();

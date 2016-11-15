@@ -3,9 +3,9 @@
 const http = require('http');
 const gpio = require('rpi-gpio');
 
-const pin = 4;
+const pin = 23;
 
-const stationIP = 'http://10.0.0.710';
+const stationIP = 'http://10.0.0.70';
 
 const sec = 1;
 const secTimer = sec * 1000;

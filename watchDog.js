@@ -32,6 +32,8 @@ const areYouAwake = () => {
     cycleOff();
     rpio.sleep(sec);
     cycleOn();
+    rpio.destropy();
+    
     console.log(`reset station on pin ${pin} at ${new Date()}`);
   });
 };

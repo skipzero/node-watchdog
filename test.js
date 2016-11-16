@@ -11,18 +11,22 @@ const secTimer = sec * 1000;
 
 gpio.BCM_GPIO = true;
 gpio.output(pin, 1).then(() => {
+  gpio.read(pin).then(val => {
+    console.log(`my value after setting to output ${val}`);
+  })
+}).then(() => {
   // areYouAwake();
   console.info(`initial set pin #${pin} to 'on'...`)
 });
 
 gpio.input(pin).then((suc, rej) => {
   gpio.read(pin).then(val => {
-    console.log('Value...', val)
+    console.log('1 Value...', val)
   })
 });
 
 gpio.read(pin).then(val => {
-  console.log('Value...', val)
+  console.log('2 Value...', val)
 })
 
 const cycleOff = () => {

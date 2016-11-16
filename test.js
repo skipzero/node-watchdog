@@ -1,36 +1,24 @@
 'use strict';
 
 const http = require('http');
-const gpio = require('wpi-gpio');
+const gpio = require('pi-gpio');
 
-const pin = 23;
+const pin = 16;
 const stationIP = 'http://10.0.0.70';
 
 const sec = 5;
 const secTimer = sec * 1000;
 
-gpio.BCM_GPIO = true;
-gpio.output(pin, 1).then(() => {
-  gpio.read(pin).then(val => {
-    console.log(`my value after setting to output ${val}`);
-  })
-}).then(() => {
-  // areYouAwake();
-  console.info(`initial set pin #${pin} to 'on'...`)
+gpio.close(pin, () => {
+  console.log(`#${pin}, opened...`);
 });
 
-gpio.input(pin).then((suc, rej) => {
-  gpio.read(pin).then(val => {
-    console.log('1 Value...', val)
-  })
+gpio.open(pin, output, () => {
+  console.log(`#${pin}, opened...`);
 });
-
-gpio.read(pin).then(val => {
-  console.log('2 Value...', val)
-})
 
 const cycleOff = () => {
-  gpio.write(pin, 0).then(() => {
+  gpio.write(pin, 0, () => {
     console.log(`#${pin} set to 'off'...`)
     cycleOn();
   });
@@ -38,7 +26,7 @@ const cycleOff = () => {
 
 const cycleOn = () => {
   setTimeout(() => {
-    gpio.write(pin, 1).then(() => {
+    gpio.write(pin, 1, () => {
       console.info(`#${pin} set to 'on'...`)
     })
   }, secTimer);

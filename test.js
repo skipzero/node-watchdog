@@ -13,7 +13,7 @@ gpio.close(pin, () => {
   console.log(`#${pin}, opened...`);
 });
 
-gpio.open(pin, output, () => {
+gpio.open(pin, 'output', () => {
   console.log(`#${pin}, opened...`);
 });
 

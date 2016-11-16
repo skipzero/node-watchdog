@@ -10,7 +10,7 @@ const sec = 5;
 const secTimer = sec * 1000;
 
 gpio.close(pin, () => {
-  console.log(`#${pin}, opened...`);
+  console.log(`#${pin}, closed...`);
 });
 
 gpio.open(pin, 'output', () => {

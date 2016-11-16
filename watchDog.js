@@ -1,7 +1,7 @@
 'use strict';
 
 const http = require('http');
-const gpio = require('wpi-gpio');
+const gpio = require('pi-gpio');
 
 const pin = 23;
 const stationIP = 'http://10.0.0.70';
@@ -9,8 +9,16 @@ const stationIP = 'http://10.0.0.70';
 const sec = 5;
 const secTimer = sec * 1000;
 
+gpio.close(pin, () => {
+  console.log(`#${pin}, opened...`);
+});
+
+gpio.open(pin, 'output', () => {
+  console.log(`#${pin}, opened...`);
+});
+
 const cycleOff = () => {
-  gpio.write(pin, 0).then(() => {
+  gpio.write(pin, 0, () => {
     console.log(`#${pin} set to 'off'...`)
     cycleOn();
   });
@@ -18,7 +26,7 @@ const cycleOff = () => {
 
 const cycleOn = () => {
   setTimeout(() => {
-    gpio.write(pin, 1).then(() => {
+    gpio.write(pin, 1, () => {
       console.info(`#${pin} set to 'on'...`)
     })
   }, secTimer);

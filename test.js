@@ -1,36 +1,24 @@
 'use strict';
-
 const http = require('http');
-const gpio = require('pi-gpio');
+const cmd = require('node-cmd');
 
-const pin = 16;
-const stationIP = 'http://10.0.0.70';
+const stationIP = 'http://10.0.0.35';
 
-const sec = 5;
+const sec = 1;
 const secTimer = sec * 1000;
-
-gpio.close(pin, () => {
-  console.log(`#${pin}, opened...`);
-});
-
-gpio.open(pin, 'output', () => {
-  console.log(`#${pin}, opened...`);
-});
-
-const cycleOff = () => {
-  gpio.write(pin, 0, () => {
-    console.log(`#${pin} set to 'off'...`)
-    cycleOn();
-  });
-};
 
 const cycleOn = () => {
   setTimeout(() => {
-    gpio.write(pin, 1, () => {
-      console.info(`#${pin} set to 'on'...`)
-    })
+    cmd.run('sudo python /home/pi/gpio.py on');
+    console.info('set to on...');
   }, secTimer);
 };
+
+const cycleOff = () => {
+  cmd.run('sudo python /home/pi/gpio.py off');
+  cycleOn();
+  console.info('set pin to off...')
+}
 
 const areYouAwake = () => {
   http.get(stationIP, (res) => {
@@ -42,6 +30,8 @@ const areYouAwake = () => {
     }
   }).on('error', (err) => {
     cycleOff();
-    console.log(`reset station on pin #${pin} at ${new Date()}`);
+    console.info(`reset station on pin at ${new Date()}`);
+  }).on('data', (data) => {
+    console.info('Data', data);
   });
 };

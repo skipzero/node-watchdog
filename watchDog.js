@@ -1,12 +1,11 @@
 'use strict';
-
 const http = require('http');
 const gpio = require('pi-gpio');
 
-const pin = 23;
-const stationIP = 'http://10.0.0.70';
+const pin = 16;
+const stationIP = 'http://10.0.0.35';
 
-const sec = 5;
+const sec = 0.5;
 const secTimer = sec * 1000;
 
 gpio.close(pin, () => {
@@ -15,6 +14,7 @@ gpio.close(pin, () => {
 
 gpio.open(pin, 'output', () => {
   console.log(`#${pin}, opened...`);
+  areYouAwake();
 });
 
 const cycleOff = () => {
@@ -42,6 +42,6 @@ const areYouAwake = () => {
     }
   }).on('error', (err) => {
     cycleOff();
-    console.log(`reset station on pin #${pin} at ${new Date()}`);
+    console.log(`reset station, pin ${pin} @ ${new Date()}`);
   });
 };

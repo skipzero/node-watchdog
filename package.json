@@ -2,7 +2,7 @@
   "name": "node-watchdog",
   "version": "0.0.1",
   "description": "watchdog for checking IP and toggling GPIO pins",
-  "main": "index.js",
+  "main": "watchdog.js",
   "scripts": {
     "test": "mocha",
     "start": "node ./watchDog.js"

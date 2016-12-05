@@ -42,6 +42,6 @@ const areYouAwake = () => {
     }
   }).on('error', (err) => {
     cycleOff();
-    console.log(`reset station, pin ${pin} @ ${new Date()}`);
+    console.log(`Error connecting. reset station, pin ${pin} @ ${new Date()}`);
   });
 };

@@ -3,22 +3,23 @@ const http = require('http');
 const cmd = require('node-cmd');
 
 const stationIP = 'http://10.0.0.35';
+const gpioer = 'sudo python /home/pi/gpio.py';
 
-const sec = 1;
+const sec = 0.5;
 const secTimer = sec * 1000;
 
 const cycleOn = () => {
   setTimeout(() => {
-    cmd.run('sudo python /home/pi/gpio.py on');
+    cmd.run(`${gpioer} on`);
     console.info('set to on...');
   }, secTimer);
 };
 
 const cycleOff = () => {
-  cmd.run('sudo python /home/pi/gpio.py off');
+  cmd.run(`${gpioer} off`);
   cycleOn();
-  console.info('set pin to off...')
-}
+  console.info('set pin to off...');
+};
 
 const areYouAwake = () => {
   http.get(stationIP, (res) => {
@@ -30,8 +31,6 @@ const areYouAwake = () => {
     }
   }).on('error', (err) => {
     cycleOff();
-    console.info(`reset station on pin at ${new Date()}`);
-  }).on('data', (data) => {
-    console.info('Data', data);
+    console.log(`reset station, pin ${pin} @ ${new Date()}`);
   });
 };

@@ -1,4 +1,5 @@
-#!/usr/local/bin/gpio-admin
+#!/home/pi/.nvm/versions/node/v4.5.0/bin/node
+
 'use strict';
 const http = require('http');
 const gpio = require('pi-gpio');
@@ -43,6 +44,6 @@ const areYouAwake = () => {
     }
   }).on('error', (err) => {
     cycleOff();
-    console.log(`Error connecting. reset station, pin ${pin} @ ${new Date()}`);
+    console.log(`Error connecting. \n\n  ${err} \n\nReset station, pin ${pin} @ ${new Date()}`);
   });
 };

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 'use strict';
 const http = require('http');
 const cmd = require('node-cmd');

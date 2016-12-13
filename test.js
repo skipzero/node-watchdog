@@ -27,6 +27,7 @@ const areYouAwake = () => {
       console.info(`Station up at ${new Date()}`);
       return;
     }
+    cycleOff();
   })
   .on('error', (err) => {
     cycleOff();

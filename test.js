@@ -3,14 +3,14 @@
 const http = require('http');
 const cmd = require('node-cmd');
 const stationIP = 'http://10.0.0.35';
-const gpioer = 'sudo python /home/pi/node-watchdog/gpio.py';
+const gpioer = 'python /home/pi/node-watchdog/gpio.py';
 const sec = 1000;
 
 const cycleOn = () => {
   setTimeout(() => {
     cmd.run(`${gpioer} on`);
     console.info('set to on...');
-  }, sec);
+  }, 600);
 };
 
 const cycleOff = () => {
@@ -22,12 +22,13 @@ const cycleOff = () => {
 const areYouAwake = () => {
   http.get(stationIP, (res) => {
     const code = res.statusCode;
+    console.info(`[${new Date()}] STATUS: ${status}`);
     res.setEncoding('utf8');
     if (code === 200) {
       console.info(`Station up at ${new Date()}`);
       return;
     }
-    cycleOff();
+//    cycleOff();
   })
   .on('error', (err) => {
     cycleOff();

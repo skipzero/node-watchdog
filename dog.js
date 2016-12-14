@@ -10,14 +10,7 @@ const stationIP = 'http://10.0.0.35';
 const sec = 0.5;
 const secTimer = sec * 1000;
 
-gpio.close(pin, () => {
-  console.log(`#${pin}, closed...`);
-});
-
-gpio.open(pin, 'output', () => {
-  console.log(`#${pin}, opened...`);
   areYouAwake();
-});
 
 const cycleOff = () => {
   gpio.write(pin, 0, () => {

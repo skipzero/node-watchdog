@@ -7,23 +7,26 @@ const gpio = require('pi-gpio');
 const pin = 16;
 const stationIP = 'http://10.0.0.35';
 
-const sec = 0.5;
-const secTimer = sec * 1000;
-
-  areYouAwake();
+const sec = 500;
 
 const cycleOff = () => {
-  gpio.write(pin, 0, () => {
-    console.log(`#${pin} set to 'off'...`)
-    cycleOn();
+  gpio.open(pin, 'output', err => {
+    gpio.write(pin, 0, () => {
+      // console.log(`#${pin} set to 'off'...`);
+      gpio.close(pin);
+    });
   });
+  cycleOn();
 };
 
 const cycleOn = () => {
   setTimeout(() => {
-    gpio.write(pin, 1, () => {
-      console.info(`#${pin} set to 'on'...`)
-    })
+    gpio.open(pin, 'output', err => {
+      gpio.write(pin, 1, () => {
+        console.info(`#${pin} set to 'on'...`);
+        gpio.close(pin);
+      });
+    });
   }, secTimer);
 };
 
@@ -40,3 +43,5 @@ const areYouAwake = () => {
     console.log(`Error connecting. \n\n  ${err} \n\nReset station, pin ${pin} @ ${new Date()}`);
   });
 };
+
+areYouAwake();

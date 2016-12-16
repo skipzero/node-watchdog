@@ -7,8 +7,6 @@ const gpio = require('pi-gpio');
 const pin = 16;
 const stationIP = 'http://10.0.0.35';
 
-const sec = 500;
-
 const cycleOff = () => {
   gpio.open(pin, 'output', err => {
     gpio.write(pin, 0, () => {
@@ -27,7 +25,7 @@ const cycleOn = () => {
         gpio.close(pin);
       });
     });
-  }, secTimer);
+  }, 500);
 };
 
 const areYouAwake = () => {
